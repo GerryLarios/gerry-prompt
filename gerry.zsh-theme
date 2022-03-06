@@ -1,4 +1,4 @@
-ZSH_THEME_GIT_PROMPT_PREFIX="git:"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_AHEAD=" %{$fg[cyan]%}▴%{$reset_color%}"
@@ -86,24 +86,28 @@ precmd () {
   print -rP "$_1LEFT$_1SPACES$_1RIGHT"
 }
 
+current_directory() {
+  echo "%{$fg_bold[green]%}/%1~"
+}
+
 ok_prompt() {
-  echo "%{$fg[white]%} ➜"
+  echo "%{$fg[white]%}$%{$reset_color%}"
 }
 
 err_prompt() {
-  echo "%{$fg[red]%} ➜"
+  echo "%{$FG[196]%}$%{$reset_color%}"
 }
 
 prompt_indicator() {
-  echo "%(?.$(ok_prompt).$(err_prompt)) %{$reset_color%}"
+  echo "%(?.$(ok_prompt).$(err_prompt)) "
 }
 
-_USERNAME="%n@%m"
-_PATH="%{$fg[white]%}%~%{$reset_color%}"
+_USERNAME="%{$fg_bold[cyan]%}%n@%m"
+_PATH="%{$fg[magenta]%}%~%{$reset_color%}"
 
 _1LEFT="$_USERNAME:$_PATH"
-_1RIGHT="[%*]"
+_1RIGHT="%{$fg_bold[white]%}[%*]"
 
-PROMPT='[%2~]
+PROMPT='$(current_directory)
 $(prompt_indicator)'
 RPROMPT='$(git_prompt)'
