@@ -95,7 +95,7 @@ ok_prompt() {
 }
 
 err_prompt() {
-  echo "%{$FG[196]%}$%{$reset_color%}"
+  echo "%{$fg[red]%}$%{$reset_color%}"
 }
 
 prompt_indicator() {
